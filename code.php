@@ -5,6 +5,7 @@ if (isset($_POST['confirm_order-btn'])) {
     $customerId = hash('sha256', $_SERVER['REMOTE_ADDR'] . time());
     $checkCustomerId = "SELECT `customerId` FROM `tbl_customer` WHERE `customerId`='$customerId'";
     $checkCustomerId_run = mysqli_query($conn, $checkCustomerId);
+
     if (mysqli_num_rows($checkCustomerId_run) == 0) {
         $fname = mysqli_real_escape_string($conn, $_POST['fname']);
         $lname = mysqli_real_escape_string($conn, $_POST['lname']);
@@ -19,7 +20,6 @@ if (isset($_POST['confirm_order-btn'])) {
         $query_run = mysqli_query($conn, $query);
     } else {
         $query = "INSERT INTO `tbl_order` (`productId`, `orderQuantity`, `totalPrice`, `customerId`) VALUES ('" . $_POST['productId'] . "', 1, '" . $_POST['productPrice'] . "', '$customerId')";
-        echo $query;
         $query_run = mysqli_query($conn, $query);
 
         if ($query_run) {
