@@ -91,7 +91,7 @@ include('includes/navbar.php');
                                 if (isset($_GET['id'])) {
                                     $productId = mysqli_real_escape_string($conn, $_GET['id']);
                                     $query = "SELECT * FROM `tbl_product` WHERE `productId`='$productId'";
-                                    $query_run = mysqli_query($conn, $query);
+                                    $query_run = $conn->query($query);
                                     while ($result = mysqli_fetch_assoc($query_run)) {
                                 ?>
                                         <input type="hidden" name="productId" value="<?= $result['productId'] ?>" >

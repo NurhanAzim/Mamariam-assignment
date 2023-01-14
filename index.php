@@ -22,7 +22,7 @@ include('includes/navbar.php');
                             <tbody>
                                 <?php
                                 $query = "SELECT `tbl_order`.`orderId`, `tbl_order`.`orderDate`, `tbl_order`.`totalPrice`, `tbl_order`.`statusId`,`tbl_status`.`description` FROM `tbl_order` INNER JOIN `tbl_status` ON `tbl_order`.`statusId`=`tbl_status`.`statusId`";
-                                $query_run = mysqli_query($conn, $query);
+                                $query_run = $conn->query($query);
                                 if (mysqli_num_rows($query_run) > 0) {
                                     foreach ($query_run as $row) {
                                 ?>

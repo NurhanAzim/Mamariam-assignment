@@ -7,7 +7,7 @@ include('includes/navbar.php');
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <?php
             $query = "SELECT * FROM `tbl_product`";
-            $query_run = mysqli_query($conn, $query);
+            $query_run = $conn->query($query);
             if (mysqli_num_rows($query_run) > 0) {
                 foreach ($query_run as $row) {
 
