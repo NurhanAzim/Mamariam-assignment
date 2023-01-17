@@ -1,0 +1,17 @@
+{
+    "name": "sistemorder/composer",
+    "autoload": {
+        "psr-4": {
+            "Sistemorder\\Composer\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Azim",
+            "email": "azim.nurhan.ahmad@gmail.com"
+        }
+    ],
+    "require": {
+        "paragonie/random_compat": "^9.99"
+    }
+}

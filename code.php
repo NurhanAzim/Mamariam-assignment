@@ -1,10 +1,13 @@
 <?php
 include('admin/config/db_con.php');
+require_once __DIR__ . '/includes/composer/vendor/autoload.php';
 
 if (isset($_POST['confirm_order-btn'])) {
-    $customerId = hash('sha256', $_SERVER['REMOTE_ADDR'] . time());
+    $randomBytes = random_bytes(4);
+    $customerId = unpack('N', $randomBytes)[1] & 0x7FFFFFFF;
+    $customerId = $customerId % 1000000000;//generate 9 random number
     $checkCustomerId = "SELECT `customerId` FROM `tbl_customer` WHERE `customerId`='$customerId'";
-    $checkCustomerId_run = $conn->query($conn, $checkCustomerId);
+    $checkCustomerId_run = $conn->query($checkCustomerId);
 
     if (mysqli_num_rows($checkCustomerId_run) == 0) {
         $fname = mysqli_real_escape_string($conn, $_POST['fname']);
@@ -18,16 +21,15 @@ if (isset($_POST['confirm_order-btn'])) {
 
         $query = "INSERT INTO `tbl_customer`(`customerId`, `first_name`, `last_name`, `address`, `city`, `state`, `postcode`, `telNo`, `email`) VALUES ('$customerId', '$fname', '$lname', '$address', '$city', '$state', '$postcode', $telNo, '$email') LIMIT 1";
         $query_run = $conn->query($query);
-    } else {
-        $query = "INSERT INTO `tbl_order` (`productId`, `orderQuantity`, `totalPrice`, `customerId`) VALUES ('" . $_POST['productId'] . "', 1, '" . $_POST['productPrice'] . "', '$customerId')";
-        $query_run = $conn->query($query);
+    }
+    $query = "INSERT INTO `tbl_order` (`productId`, `orderQuantity`, `totalPrice`, `customerId`) VALUES ('" . $_POST['productId'] . "', 1, '" . $_POST['productPrice'] . "', '$customerId')";
+    $query_run = $conn->query($query);
 
-        if ($query_run) {
-            header("Location: index.php");
-            exit(0);
-        } else {
-            header("Location: checkout.php");
-            exit(0);
-        }
+    if ($query_run) {
+        header("Location: index.php");
+        exit(0);
+    } else {
+        header("Location: checkout.php");
+        exit(0);
     }
 }
