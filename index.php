@@ -14,10 +14,10 @@ include('includes/navbar.php');
                         <table class="table table-bordered table-hover table-responsive-md">
                             <thead class="bg-light">
                                 <th class="py-4 align-middle">Order#</th>
-                                <th class="py-4 align-middle">Date</th>
-                                <th class="py-4 align-middle">Total</th>
+                                <th class="py-4 align-middle">Tarikh</th>
+                                <th class="py-4 align-middle">Jumlah</th>
                                 <th class="py-4 align-middle">Status</th>
-                                <th class="py-4 align-middle">Action</th>
+                                <th class="py-4 align-middle">Tindakan</th>
                             </thead>
                             <tbody>
                                 <?php

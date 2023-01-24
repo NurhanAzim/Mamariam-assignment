@@ -30,6 +30,6 @@ if (isset($_POST['confirm_order-btn'])) {
             exit(0);
         }
     } else {
-        echo $createCustomer;
+        
     }
 }
